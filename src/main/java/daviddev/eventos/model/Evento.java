@@ -1,12 +1,14 @@
 package daviddev.eventos.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "eventos_app") // Garante o nome exato da tabela no MySQL
-public class Evento {
+public class Evento  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,15 +16,19 @@ public class Evento {
     private Long id;
 
     @Column(name = "nome")
+    @NotBlank
     private String nome;
 
     @Column(name = "local")
+    @NotBlank
     private String local;
 
     @Column(name = "data")
+    @NotBlank
     private String data;
 
     @Column(name = "horario")
+    @NotBlank
     private String horario;
 
     @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL) // 👈 O 'mappedBy' avisa ao Hibernate para NÃO criar colunas extras!

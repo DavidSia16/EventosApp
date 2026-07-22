@@ -1,0 +1,19 @@
+<!Doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+<head>
+    <title>EventosApp</title>
+</head>
+<body>
+    <div class="alert alert-sucsess alert-dimissible" role="alert" th:if="${not #strings.isEmpty(mensagem)}" >
+        <span th:text="${mensagem}"></span>
+    </div>
+
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+
+</html>

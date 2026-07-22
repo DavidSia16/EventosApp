@@ -17,14 +17,26 @@
         <p> Local :<span th:text="${evento.local}"></span></p>
         <p> Data : <span th:text="${evento.data}"></span></p>
         <p> Horario : <span th:text="${evento.horario}"></span></p>
-
+    </div>
+    <th:block th:include="mensagemValidacao"></th:block>
         <form method="post">
             Nome : <input type="text" value="" name="nomeConvidado" />
             RG : <input type="text" value="" name="rg" />
             <button class="btn waves-effect waves-light" type="submit" name="action">Adicionar </button>
         </form>
     </div>
-</div>
+    <h5>Lista de Convidados</h5>
+    <div class="container" th:each="convidado : ${convidados}">
+        <div class="row">
+            <div class="input-field col s6">
+                <p><span th:text="${convidado?.nomeConvidado}"></span></p>
+            </div>
+            <div class="input-field col s3">
+                <span th:text="${convidado?.rg}"></span>
+            </div>
+        </div>
+    <div/>
+
 
 </div>
 <script type="text/javascript" src="materialize/js/materialize.min.js"></script>

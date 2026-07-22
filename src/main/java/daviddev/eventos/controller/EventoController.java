@@ -4,6 +4,7 @@ import daviddev.eventos.model.Convidado;
 import daviddev.eventos.model.Evento;
 import daviddev.eventos.repository.ConvidadoRepository;
 import daviddev.eventos.repository.EventoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Optional;
+import org.springframework.validation.BindingResult;
 
 @Controller
 public class EventoController {
@@ -29,10 +29,14 @@ public class EventoController {
     }
 
     @RequestMapping(value = "/cadastrarEvento", method = RequestMethod.POST)
-    public String form(Evento evento) {
+    public String form( @Valid Evento evento, BindingResult result, RedirectAttributes attributes ) {
+        if(result.hasErrors()) {
+            attributes.addFlashAttribute("mensagem", "Verifique os campos!");
+            return "redirect:/cadastrarEvento";
+        }
 
         eventoRepository.save(evento);
-
+        attributes.addFlashAttribute("mensagem", "Evento cadastrado com sucesso!");
         return "redirect:/cadastrarEvento";
     }
     @RequestMapping("/eventos")
@@ -44,26 +48,35 @@ public class EventoController {
     }
 
     @RequestMapping(value="/{codigo}" , method = RequestMethod.GET )
-    public ModelAndView detalhesEvento(@PathVariable("codigo") long codigo){
-        Evento evento = eventoRepository.findById(codigo)
-                .orElseThrow(() -> new IllegalArgumentException("Evento não encontrado: " + codigo));
+    public ModelAndView detalhesEvento(@PathVariable("codigo") long codigo) {
+
+        Evento evento = eventoRepository.findById(codigo);
 
         ModelAndView mv = new ModelAndView("evento/detalhesEvento");
         mv.addObject("evento", evento);
         System.out.println("evento: " + evento);
+
+        Iterable<Convidado> convidados = convidadoRepository.findByEvento(evento);
+        mv.addObject("convidados", convidados);
         return mv;
     }
 
     @RequestMapping(value="/{codigo}" , method = RequestMethod.POST)
-    public String detalhesEventoPost(@PathVariable("codigo") long codigo, Convidado convidado, RedirectAttributes attributes){
-        Evento evento = eventoRepository.findById(codigo).orElse(null);
+    public String detalhesEventoPost(@PathVariable("codigo") long codigo,@Valid Convidado convidado, BindingResult result,RedirectAttributes attributes){
+        if(result.hasErrors()) {
+            attributes.addFlashAttribute("mensagem", "Verifique os campos!");
+            return "redirect:/{codigo}";
+        }
+        Evento evento = eventoRepository.findById(codigo);
 
         if (evento == null) {
-            throw new IllegalArgumentException("Evento inválido para o código: " + codigo);
+            attributes.addFlashAttribute("mensagem", "Evento não encontrado!");
+            return "redirect:/eventos";
         }
 
         convidado.setEvento(evento);
         convidadoRepository.save(convidado);
+        attributes.addFlashAttribute("mensagem", "Convidado adicionado com sucesso!");
 
         // Adiciona o código de forma segura para o redirecionamento
         attributes.addAttribute("codigo", codigo);
