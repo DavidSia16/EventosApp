@@ -4,20 +4,31 @@
 <!--Import Google Icon Font-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="materialize/style/style.css"/>
 <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
 <head>
     <title>EventosApp</title>
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Lista de Eventos</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a  href="/cadastrarEvento" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>  Cadastrar Evento</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     <h1>Lista de Eventos</h1>
-    <h3><a class="waves-effect waves-light btn" href="/cadastrarEvento"><i class="material-icons">add_circle_outline</i>  Cadastrar Evento</a></h3>
-    <table class="container">
+      <table class="container">
         <thead>
             <tr>
                 <th>Nome</th>
                 <th>Local</th>
                 <th>Data</th>
                 <th>Horario</th>
+                <th>Deletar</th>
             </tr>
 
         </thead>
@@ -27,6 +38,7 @@
                 <td><p><span th:text="${evento.local}"></span><br></p></td>
                 <td><p><span th:text="${evento.data}"></span><br></p></td>
                 <td><p><span th:text="${evento.horario}"></span><br></p></td>
+                <td><a class="waves-effect waves-light btn-small-center" th:href="${(#mvc.url('EC#deletarEvento').arg(0, evento.id)).build()}"><i class="material-icons left">delete</i></a></td>
             </tr>
         </tbody>
     </table>
