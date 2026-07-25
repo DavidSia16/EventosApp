@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "eventos_app") // Garante o nome exato da tabela no MySQL
+@Table(name = "eventos_app")
 public class Evento  {
 
     @Id
@@ -31,7 +31,7 @@ public class Evento  {
     @NotBlank
     private String horario;
 
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL) // 👈 O 'mappedBy' avisa ao Hibernate para NÃO criar colunas extras!
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
     private List<Convidado> convidados;
 
     // Construtor vazio obrigatório para o JPA

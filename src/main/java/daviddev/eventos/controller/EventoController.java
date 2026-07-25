@@ -52,12 +52,18 @@ public class EventoController {
 
         Evento evento = eventoRepository.findById(codigo);
 
+        if (evento == null) {
+            // Redireciona ou trata caso o evento não exista no banco
+            return new ModelAndView("redirect:/eventos");
+        }
+
         ModelAndView mv = new ModelAndView("evento/detalhesEvento");
         mv.addObject("evento", evento);
         System.out.println("evento: " + evento);
 
         Iterable<Convidado> convidados = convidadoRepository.findByEvento(evento);
         mv.addObject("convidados", convidados);
+        mv.addObject("convidado", new Convidado());
         return mv;
     }
 

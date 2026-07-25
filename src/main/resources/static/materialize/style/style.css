@@ -1,18 +1,196 @@
-.detalhesEvento {
-    box-shadow: 0px 0px 5px gray;
-    padding-top: 20px;
-    padding-left: 20px;
-    margin-bottom: 68px;
+/* ==========================================================================
+   VARIAVEIS E REGRAS GERAIS
+   ========================================================================== */
+:root {
+    --primary-glow: #6366f1;
+    --secondary-glow: #8b5cf6;
+    --bg-dark: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
 }
 
-.formEvento {
-    box-shadow: 0px 0px 5px gray;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-bottom: 10px;
-    margin-bottom: 68px;
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    background-image:
+            radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+    min-height: 100vh;
+    color: #f8fafc;
 }
 
-.tabelaConvidado{
-    width: 50%;
+/* ==========================================================================
+   NAVBAR & CABEÇALHO
+   ========================================================================== */
+nav.nav-futuristic {
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: none !important;
+}
+
+.futuristic-title {
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   CONTAINERS & CARDS
+   ========================================================================== */
+.app-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.futuristic-card {
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5) !important;
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem;
+}
+
+.futuristic-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+}
+
+/* ==========================================================================
+   INPUTS & FORMULÁRIOS
+   ========================================================================== */
+.input-field label {
+    color: #94a3b8 !important;
+}
+
+.input-field input:focus + label {
+    color: #8b5cf6 !important;
+}
+
+.input-field input {
+    color: #f8fafc !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.input-field input:focus {
+    border-bottom: 2px solid #8b5cf6 !important;
+    box-shadow: 0 1px 0 0 #8b5cf6 !important;
+}
+
+.input-field .prefix {
+    color: #94a3b8 !important;
+}
+
+.input-field .prefix.active {
+    color: #8b5cf6 !important;
+}
+
+/* Fix para a cor dos ícones nos inputs de date/time no Chrome/Firefox */
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+/* ==========================================================================
+   BOTÕES
+   ========================================================================== */
+.btn-futuristic {
+    background: linear-gradient(135deg, var(--primary-glow) 0%, var(--secondary-glow) 100%) !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39) !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-futuristic:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(139, 92, 246, 0.5) !important;
+}
+
+.btn-delete {
+    background: rgba(239, 68, 68, 0.2) !important;
+    color: #ef4444 !important;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    border-radius: 6px;
+    padding: 4px 8px;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.btn-delete:hover {
+    background: rgba(239, 68, 68, 0.4) !important;
+    color: #fff !important;
+}
+
+/* ==========================================================================
+   TABELAS
+   ========================================================================== */
+.table-container {
+    margin-top: 2rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.table-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+}
+
+table.futuristic-table {
+    color: #f8fafc;
+}
+
+table.futuristic-table th {
+    color: #94a3b8;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+}
+
+table.futuristic-table td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.event-link {
+    color: #8b5cf6;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.event-link:hover {
+    color: #a78bfa;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   ALERTAS E MENSAGENS DE VALIDAÇÃO
+   ========================================================================== */
+.futuristic-alert {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 8px;
+    color: #34d399;
+    padding: 12px 16px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(8px);
 }
