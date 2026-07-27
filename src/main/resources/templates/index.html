@@ -39,7 +39,7 @@
                 <th>Local</th>
                 <th>Data</th>
                 <th>Horário</th>
-                <th class="center-align">Ações</th>
+                <th class="center-align" sec:authorize="hasRole('ADMIN')">Ações</th>
             </tr>
             </thead>
             <tbody>
@@ -51,7 +51,7 @@
                 <td th:text="${evento.data}"></td>
                 <td th:text="${evento.horario}"></td>
                 <td class="center-align">
-                    <a class="btn-delete waves-effect" th:href="${(#mvc.url('EC#deletarEvento').arg(0, evento.id)).build()}">
+                    <a class="btn-delete waves-effect" th:href="${(#mvc.url('EC#deletarEvento').arg(0, evento.id)).build()}" sec:authorize="hasRole('ADMIN')">
                         <i class="material-icons" style="font-size: 1.2rem; vertical-align: middle;">delete</i>
                     </a>
                 </td>

@@ -179,6 +179,12 @@ table.futuristic-table td {
     text-decoration: underline;
 }
 
+.rg-borrado {
+    filter: blur(5px);
+    user-select: none; /* Impede que o usuário selecione o texto oculto */
+    cursor: default;
+}
+
 /* ==========================================================================
    ALERTAS E MENSAGENS DE VALIDAÇÃO
    ========================================================================== */
