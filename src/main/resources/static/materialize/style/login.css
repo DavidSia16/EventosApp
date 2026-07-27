@@ -1,0 +1,133 @@
+/* Reset Básico e Fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Fundo degradê escuro alinhado com o seu atual */
+    background: radial-gradient(circle at top right, #1a1c2e, #0d0f17);
+    color: #ffffff;
+}
+
+/* Card Container com efeito de Vidro Fosco */
+.login-container {
+    background: rgba(23, 25, 41, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 40px 35px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(120, 80, 255, 0.05);
+}
+
+/* Logo "EventosApp" Grande */
+.logo-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #ffffff;
+}
+
+.logo-header h1 span {
+    color: #7c3aed; /* Roxo em destaque para o "App" */
+    font-weight: 800;
+}
+
+.logo-header p {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    margin-top: 6px;
+}
+
+/* Campos de Formulário */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #cbd5e1;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.input-group input::placeholder {
+    color: #64748b;
+}
+
+/* Destaque ao clicar/focar no campo */
+.input-group input:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
+    background: rgba(15, 23, 42, 0.9);
+}
+
+/* Botão Entrar */
+.btn-submit {
+    margin-top: 10px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #6d28d9, #5b21b6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Mensagem de Erro */
+.alert-error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-bottom: 20px;
+}

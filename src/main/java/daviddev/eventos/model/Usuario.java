@@ -1,9 +1,9 @@
 package daviddev.eventos.model;
 
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -14,6 +14,20 @@ public class Usuario implements UserDetails {
     private String login;
     private String nomeCompleto;
     private String senha;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(
+            name = "usuarios_id", referencedColumnName = "login"),
+            inverseJoinColumns = @JoinColumn (
+                    name = "role_id", referencedColumnName ="nomeRole"))
+    private List<Role> roles;
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
 
     public String getLogin() {
@@ -49,7 +63,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return this.roles;
     }
 
     @Override
@@ -71,5 +85,6 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 
 }

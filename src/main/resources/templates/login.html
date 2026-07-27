@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventosApp - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="materialize/style/login.css"/>
+</head>
+<body>
+
+<div class="login-container">
+
+    <div class="logo-header">
+        <h1>Eventos<span>App</span></h1>
+        <p>Faça login para acessar os eventos</p>
+    </div>
+
+    <div th:if="${param.error}" class="alert-error">
+        Usuário ou senha/RG inválidos!
+    </div>
+
+    <form action="/login" method="post" class="login-form">
+        <div class="input-group">
+            <label for="username">Nome / Usuário</label>
+            <input type="text" id="username" name="username" placeholder="Digite seu nome ou login" required autocomplete="off">
+        </div>
+
+        <div class="input-group">
+            <label for="password">RG / Senha</label>
+            <input type="password" id="password" name="password" placeholder="Digite seu RG ou senha" required>
+        </div>
+
+        <button type="submit" class="btn-submit">Entrar</button>
+    </form>
+</div>
+
+</body>
+</html>

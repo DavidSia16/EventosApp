@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,7 @@
 
 <nav class="nav-futuristic">
     <div class="nav-wrapper container">
-        <a href="/cadastrarEvento" class="brand-logo left futuristic-title" style="font-size: 1.4rem;">
+        <a href="/eventos" class="brand-logo left futuristic-title" style="font-size: 1.4rem;">
             <i class="material-icons left" style="color: #8b5cf6;">event</i>Eventos App
         </a>
         <ul id="nav-mobile" class="right">

@@ -40,4 +40,9 @@ public class Convidado {
     public void setEvento(Evento evento) {
         this.evento = evento;
     }
+
+    public String getNome() {
+        return nomeConvidado;
+    }
+
 }

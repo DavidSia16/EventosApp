@@ -100,7 +100,6 @@ public class EventoController {
         convidadoRepository.save(convidado);
         attributes.addFlashAttribute("mensagem", "Convidado adicionado com sucesso!");
 
-        // Adiciona o código de forma segura para o redirecionamento
         attributes.addAttribute("codigo", codigo);
 
         return "redirect:/{codigo}";

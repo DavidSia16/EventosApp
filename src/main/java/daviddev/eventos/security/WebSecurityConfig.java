@@ -1,12 +1,13 @@
 package daviddev.eventos.security;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -16,6 +17,7 @@ public class WebSecurityConfig {
 
 
     private final ImplementsUserDetailsService userDetailsService;
+
 
     public WebSecurityConfig(ImplementsUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -27,10 +29,19 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.GET, "/login", "/eventos").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cadastrarEvento").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/cadastrarEvento").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+
+                        .formLogin(form -> form
+                        .loginPage("/login")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/eventos", true)
+                        .permitAll()
                 )
-                .formLogin(form -> form.permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout").permitAll()
                 )
@@ -42,7 +53,7 @@ public class WebSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
 
     @Bean
